@@ -167,7 +167,7 @@ function loadAll() {
             const ENTER = 13;
             if (event.keyCode === ENTER) {
                 document.getElementById("equal").click();
-            }
+            } 
         });
 }
 
