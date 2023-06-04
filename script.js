@@ -1,3 +1,9 @@
+function calculateFromString(mathExpression) {
+    return new Function('return ' + mathExpression)();
+}
+
+
+
 function showNumber(number) {
     const resultado = document.getElementById("resultado");
     resultado.value += number;
@@ -8,7 +14,7 @@ function reset() {
     resultado.value = "";
 }
 
-function extracOperator(string) {
+function extractOperator(string) {
     const validOperators = "+-*/";
     for (i = 0; i < validOperators.length; i++) {
         let confirmOperator = string.includes(validOperators[i]);
@@ -19,7 +25,7 @@ function extracOperator(string) {
 }
 
 function extractOperands(string) {
-    return string.split(extracOperator(string));
+    return string.split(extractOperator(string));
 }
 
 function calculate(operandoA, operandoB, operador) {
@@ -39,9 +45,10 @@ function calculate(operandoA, operandoB, operador) {
 
 function enterOrClick() {
     const resultado = document.getElementById("resultado");
-    const operator = extracOperator(resultado.value);
-    const [operandoA, operandoB] = extractOperands(resultado.value);
-    const finalAnswer = calculate(operandoA, operandoB, operator);
+    // const operator = extractOperator(resultado.value);
+    // const [operandoA, operandoB] = extractOperands(resultado.value);
+    // const finalAnswer = calculate(operandoA, operandoB, operator);
+    const finalAnswer = calculateFromString(resultado.value);
     reset();
     showNumber(finalAnswer);
 }
@@ -167,7 +174,7 @@ function loadAll() {
             const ENTER = 13;
             if (event.keyCode === ENTER) {
                 document.getElementById("equal").click();
-            } 
+            }
         });
 }
 
